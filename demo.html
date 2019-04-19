@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>demo</title>
+    <script src='dist-web/eosjs-api.js'></script>
+    <script src='dist-web/eosjs-jsonrpc.js'></script>
+    <script src='dist-web/eosjs-jssig.js'></script>
+</head>
+<body>
+
+</body>
+<script>
+    // const defaultPrivateKey = '私钥';
+    const rpc = new eosjs_jsonrpc.JsonRpc('http://59.110.220.75:8888');
+    // const signatureProvider = new eosjs_jssig.JsSignatureProvider([defaultPrivateKey]);
+    // const api = new eosjs_api.Api({rpc, signatureProvider});
+
+    let getKeyAccounts_test = function () {
+        rpc.history_get_key_accounts('EOS61KPhJU27WJjN71PMB8EeBceEcv5vnBs87wSpDsPqaPQtCR9SG').then(result => {
+            // 输出结果
+            console.log('通过公钥获取账户名', result);
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e);
+        });
+    };
+    getKeyAccounts_test();
+
+    let getAccount_test = function () {
+        rpc.get_account('sakuya').then(result => {
+            // 输出结果
+            console.log('查询账户信息', result);
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e);
+        });
+    };
+    getAccount_test();
+
+    let getBalance_test = function () {
+        rpc.get_currency_balance(
+            'eosio.token',  // 目标币合约
+            'sakuya', // 目标账户
+            'TOK'           // 目标币名
+        ).then(result => {
+            // 输出结果
+            console.log('查询账户特定币种余额', result)
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e)
+        })
+    };
+    getBalance_test();
+
+    let getActions_test = function () {
+        rpc.history_get_actions(
+            'sakuya', // 目标账户
+            -1,             // 查询起始位置
+            -10,            // 查询偏移量
+        ).then(result => {
+            // 输出结果
+            console.log('查询账户交易记录', result)
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e)
+        })
+    };
+    getActions_test();
+
+    let tr = {
+        actions: [{
+            account: 'eosio.token',     // 合约名
+            name: 'transfer',           // 合约方法
+            authorization: [{
+                actor: 'sakuya',  // 签名账户
+                permission: 'active',
+            }],
+            data: {
+                from: 'sakuya',   // 发送账户
+                to: 'wb',     // 接收账户
+                quantity: '0.0001 TOK', // 发送金额
+                memo: 'test'                // 备注
+            }
+        }]
+    };
+    let pushTRX_test = function () {
+        api.transact(tr, {
+            blocksBehind: 3,
+            expireSeconds: 30,
+        }).then(result => {
+            // 输出结果
+            console.log('发起交易', result)
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e)
+        })
+    };
+    // pushTRX_test();
+</script>
+</html>
