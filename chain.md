@@ -17,11 +17,11 @@ const { TextEncoder, TextDecoder } = require('util');
 ## 3、配置参数
 ### 配置应用链节点地址
 ```
-const rpc = new JsonRpc('http://nd.naturetoken.io:8888', {fetch});
+const rpc = new JsonRpc('节点地址', {fetch});
 ```
 ### 配置发起交易要用到的私钥
 ```
-const pk = "你的私钥";
+const pk = '你的私钥';
 const signatureProvider = new JsSignatureProvider([pk]);
 ```
 ### 配置API
@@ -33,7 +33,7 @@ const api = new Api({rpc, signatureProvider, textDecoder: new TextDecoder(), tex
 ```
 let tr = {
     actions: [{
-        account: 'naturetokenc',    // 合约名
+        account: 'eosio.token',     // 合约名
         name: 'transfer',           // 合约方法
         authorization: [{
             actor: 'aaaaaaaaaaaa',  // 签名账户
@@ -42,7 +42,7 @@ let tr = {
         data: {
             from: 'aaaaaaaaaaaa',   // 发送账户
             to: 'bbbbbbbbbbbb',     // 接收账户
-            quantity: '0.0001 TMP', // 发送金额
+            quantity: '0.0001 TOK', // 发送金额
             memo: ''                // 备注
         }
     }]
@@ -68,7 +68,7 @@ pushTRX_test();
 ```
 let getBalance_test = function () {
     rpc.get_currency_balance(
-        'naturetokenc', // 目标币合约
+        'eosio.token',  // 目标币合约
         'aaaaaaaaaaaa', // 目标账户
         'TMP'           // 目标币名
     ).then(result => {
@@ -114,7 +114,7 @@ getBalance_test();
 ## 3、配置参数
 ### 配置应用链节点地址
 ```
-const rpc = new eosjs_jsonrpc.JsonRpc('http://nd.naturetoken.io:8888');
+const rpc = new eosjs_jsonrpc.JsonRpc('节点地址');
 ```
 ### 配置发起交易要用到的私钥
 ```
