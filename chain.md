@@ -28,7 +28,67 @@ const signatureProvider = new JsSignatureProvider([pk]);
 ```
 const api = new Api({rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder()});
 ```
-## 4、发起交易
+## 4、通过公钥获取账户名
+```
+let getKeyAccounts_test = function () {
+    rpc.history_get_key_accounts('公钥').then(result => {
+        // 输出结果
+        console.dir(result);
+    }).catch(e => {
+        // 处理报错信息
+        console.dir(e);
+    });
+};
+getKeyAccounts_test();
+```
+## 5、查询账户信息
+```
+let getAccount_test = function () {
+    rpc.get_account('aaaaaaaaaaaa').then(result => {
+        // 输出结果
+        console.dir(result);
+    }).catch(e => {
+        // 处理报错信息
+        console.dir(e);
+    });
+};
+getAccount_test();
+```
+## 6、查询账户特定币种余额
+```
+let getBalance_test = function () {
+    rpc.get_currency_balance(
+        'eosio.token',  // 目标币合约
+        'aaaaaaaaaaaa', // 目标账户
+        'TOK'           // 目标币名
+    ).then(result => {
+        // 输出结果
+        console.dir(result)
+    }).catch(e => {
+        // 处理报错信息
+        console.dir(e)
+    })
+};
+getBalance_test();
+```
+## 7、查询账户交易记录
+```
+let getActions_test = function () {
+    rpc.history_get_actions(
+        'aaaaaaaaaaaa', // 目标账户
+        -1,             // 查询起始位置
+        -10,            // 查询偏移量
+    ).then(result => {
+        // 输出结果
+        console.dir(result)
+    }).catch(e => {
+        // 处理报错信息
+        console.dir(e)
+    })
+};
+getActions_test();
+```
+## 8、发起交易
 ### 创建交易体
 ```
 let tr = {
@@ -64,40 +124,6 @@ let pushTRX_test = function () {
 };
 pushTRX_test();
 ```
-## 5、查询余额
-```
-let getBalance_test = function () {
-    rpc.get_currency_balance(
-        'eosio.token',  // 目标币合约
-        'aaaaaaaaaaaa', // 目标账户
-        'TOK'           // 目标币名
-    ).then(result => {
-        // 输出结果
-        console.dir(result)
-    }).catch(e => {
-        // 处理报错信息
-        console.dir(e)
-    })
-};
-getBalance_test();
-```
-## 6、查询交易记录
-```
-let getBalance_test = function () {
-    rpc.history_get_actions(
-        'aaaaaaaaaaaa', // 目标账户
-        -1,             // 查询起始位置
-        -10,            // 查询偏移量
-    ).then(result => {
-        // 输出结果
-        console.dir(result)
-    }).catch(e => {
-        // 处理报错信息
-        console.dir(e)
-    })
-};
-getBalance_test();
-```
 # H5模式
 ## 1、安装依赖
 ### 下载必要文件
@@ -118,13 +144,15 @@ const rpc = new eosjs_jsonrpc.JsonRpc('节点地址');
 ```
 ### 配置发起交易要用到的私钥
 ```
-const pk = '私钥';
+const pk = "私钥";
 const signatureProvider = new eosjs_jssig.JsSignatureProvider([pk]);
 ```
 ### 配置API
 ```
 const api = new eosjs_api.Api({rpc, signatureProvider});
 ```
-## 4、发起交易（同NodeJs）
-## 5、查询余额（同NodeJs）
-## 6、查询交易记录（同NodeJs）
+## 4、通过公钥获取账户名（同NodeJs）
+## 5、查询账户信息（同NodeJs）
+## 6、查询账户特定币种余额（同NodeJs）
+## 7、查询账户交易记录（同NodeJs）
+## 8、发起交易（同NodeJs）
