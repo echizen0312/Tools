@@ -5,6 +5,7 @@
 ### NPM
 ```
 npm install eosjs --save
+npm install eosjs-ecc --save
 ```
 ## 2、导入依赖
 ### NodeJs导入
@@ -13,6 +14,7 @@ const { Api, JsonRpc, RpcError } = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig');
 const fetch = require('node-fetch');
 const { TextEncoder, TextDecoder } = require('util');
+const eosjs_ecc = require('eosjs-ecc');
 ```
 ## 3、配置参数
 ### 配置应用链节点地址
@@ -124,16 +126,38 @@ let pushTRX_test = function () {
 };
 pushTRX_test();
 ```
+## 9、随机生成秘钥对
+```
+let randomKey_test = function () {
+    eosjs_ecc.randomKey().then(privateKey => {
+        // 私钥转换为公钥
+        let publicKey = eosjs_ecc.privateToPublic(privateKey);
+        let result = {
+            privateKey: privateKey,
+            publicKey: publicKey
+        }
+        // 输出结果
+        console.dir(result);
+    }).catch(e => {
+        // 处理报错信息
+        console.dir(e);
+    });
+};
+randomKey_test();
+```
 # H5模式
 ## 1、安装依赖
 ### 下载必要文件
+```
 [dist-web](https://github.com/echizen0312/Tools/tree/master/dist-web)
+```
 ## 2、导入依赖
 ### 引用js文件
 ```
 <script src='dist-web/eosjs-api.js'></script>
 <script src='dist-web/eosjs-jsonrpc.js'></script>
 <script src='dist-web/eosjs-jssig.js'></script>
+<script src="dist-web/eosjs-ecc.min.js"></script>
 ```
 ## 3、配置参数
 ### 配置应用链节点地址
@@ -154,3 +178,4 @@ const api = new eosjs_api.Api({rpc, signatureProvider});
 ## 6、查询账户特定币种余额（同NodeJs）
 ## 7、查询账户交易记录（同NodeJs）
 ## 8、发起交易（同NodeJs）
+## 9、随机生成秘钥对（同NodeJs）
