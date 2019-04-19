@@ -127,9 +127,7 @@ pushTRX_test();
 # H5模式
 ## 1、安装依赖
 ### 下载必要文件
-```
-。。。
-```
+[dist-web](https://github.com/echizen0312/Tools/tree/master/dist-web)
 ## 2、导入依赖
 ### 引用js文件
 ```
