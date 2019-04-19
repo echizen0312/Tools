@@ -8,6 +8,7 @@
     <script src='dist-web/eosjs-api.js'></script>
     <script src='dist-web/eosjs-jsonrpc.js'></script>
     <script src='dist-web/eosjs-jssig.js'></script>
+    <script src="dist-web/eosjs-ecc.min.js"></script>
 </head>
 <body>
 
@@ -82,7 +83,7 @@
                 from: 'hpnettest111',   // 发送账户
                 to: 'hpnettest222',     // 接收账户
                 quantity: '0.0001 TOK', // 发送金额
-                memo: 'test'                // 备注
+                memo: 'test'            // 备注
             }
         }]
     };
@@ -99,5 +100,22 @@
         })
     };
     // pushTRX_test();
+
+    let randomKey_test = function () {
+        eosjs_ecc.randomKey().then(privateKey => {
+            // 私钥转换为公钥
+            let publicKey = eosjs_ecc.privateToPublic(privateKey);
+            let result = {
+                privateKey: privateKey,
+                publicKey: publicKey
+            }
+            // 输出结果
+            console.log('随机生成秘钥对', result);
+        }).catch(e => {
+            // 处理报错信息
+            console.log(e);
+        });
+    };
+    randomKey_test();
 </script>
 </html>
