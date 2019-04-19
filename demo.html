@@ -13,10 +13,10 @@
 
 </body>
 <script>
-    const defaultPrivateKey = '私钥';
+    // const defaultPrivateKey = '私钥';
     const rpc = new eosjs_jsonrpc.JsonRpc('http://59.110.220.75:8888');
-    const signatureProvider = new eosjs_jssig.JsSignatureProvider([defaultPrivateKey]);
-    const api = new eosjs_api.Api({rpc, signatureProvider});
+    // const signatureProvider = new eosjs_jssig.JsSignatureProvider([defaultPrivateKey]);
+    // const api = new eosjs_api.Api({rpc, signatureProvider});
 
     let getKeyAccounts_test = function () {
         rpc.history_get_key_accounts('EOS7FMr9He7k56gJNt95FNqXVhUex7zgPNz6PkfJ4NZNv4KgWZ3kS').then(result => {
