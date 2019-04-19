@@ -70,7 +70,7 @@ let getBalance_test = function () {
     rpc.get_currency_balance(
         'eosio.token',  // 目标币合约
         'aaaaaaaaaaaa', // 目标账户
-        'TMP'           // 目标币名
+        'TOK'           // 目标币名
     ).then(result => {
         // 输出结果
         console.dir(result)
@@ -118,7 +118,7 @@ const rpc = new eosjs_jsonrpc.JsonRpc('节点地址');
 ```
 ### 配置发起交易要用到的私钥
 ```
-const pk = "私钥";
+const pk = '私钥';
 const signatureProvider = new eosjs_jssig.JsSignatureProvider([pk]);
 ```
 ### 配置API
