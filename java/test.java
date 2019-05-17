@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Test {
     public static void main(String[] arg) {
-        Rpc rpc = new Rpc("http://59.110.220.75:8888");
+        Rpc rpc = new Rpc("节点地址");
 
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("from", "转出账户");
