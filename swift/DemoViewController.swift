@@ -8,7 +8,7 @@ class DemoViewController: UIViewController {
         
         EosWallet.shared.setChainIp(ip: "节点地址")
 
-        // ---- 获取秘钥对，返回值逗号分隔（私钥,公钥）-----
+        // ---- 获取随机秘钥对，返回值逗号分隔（私钥,公钥）-----
         let k = EosWallet.shared.getKey()
 
         // ---- 发起交易 ----
