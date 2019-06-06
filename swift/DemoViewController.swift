@@ -1,7 +1,7 @@
 import UIKit
 import TradeSDK
 
-class Demo: UIViewController {
+class DemoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
