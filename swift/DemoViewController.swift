@@ -10,6 +10,11 @@ class DemoViewController: UIViewController {
 
         // ---- 获取随机秘钥对，返回值逗号分隔（私钥,公钥）-----
         let k = EosWallet.shared.getKey()
+        
+        // ---- 通过私钥获取公钥 -----
+        EosWallet.shared.getPublicKey(privateKey: "私钥") { (result, error) in
+            // result：公钥
+        }
 
         // ---- 发起交易 ----
         let from = "转出账户"
